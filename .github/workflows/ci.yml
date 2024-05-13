@@ -1,1 +1,26 @@
+name: Create Daily Release Branch
 
+# active after test
+on:
+  push:
+    branches: [ "*" ]
+  # schedule:
+  #   - cron: '0 16 * * 0-4'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Create Daily Release Branch
+      run: |
+        git config --global user.email "mj-dev+ci-mj2@linkbal.co.jp"
+        git config --global user.name "Ci Schedule Bot"
+        BRANCH_NAME="release/$(date --date 'tomorrow' +%Y-%m-%d)"
+        echo $BRANCH_NAME
+
+# git remote set-url origin https://gitlab-ci-token:$NEED_TOKEN@gitlab.linkbal.com/mj/mj2.git
+# git fetch origin master
+# git checkout -b $BRANCH_NAME origin/master
+# git push -o merge_request.create -o merge_request.target=master -o merge_request.title="$BRANCH_NAME" origin $BRANCH_NAME
