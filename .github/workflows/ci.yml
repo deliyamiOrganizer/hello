@@ -12,13 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Create Daily Release Branch
-      run: |
-        git config --global user.email "mj-dev+ci-mj2@linkbal.co.jp"
-        git config --global user.name "Ci Schedule Bot"
-        BRANCH_NAME="release/$(date --date 'tomorrow' +%Y-%m-%d)"
-        echo $BRANCH_NAME
+      - uses: actions/checkout@v2
+      - name: Set daily branch name
+        id: set_branch_name
+        run: |
+          git config --global user.email "mj-dev+ci-mj2@linkbal.co.jp"
+          git config --global user.name "Ci Schedule Bot"
+          BRANCH_NAME="release-$(date --date 'tomorrow' +%Y-%m-%d)"
+          echo "::set-output name=branch_name::$BRNACH_NAME"
+
+      - name: Create release pr
+        run: |
+          gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b ""
+    
 
 # git remote set-url origin https://gitlab-ci-token:$NEED_TOKEN@gitlab.linkbal.com/mj/mj2.git
 # git fetch origin master
