@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      GH_TOKEN: ${{ secrets.MY_TOKEN }}
+
     steps:
       - uses: actions/checkout@v2
       - name: Set daily branch name
