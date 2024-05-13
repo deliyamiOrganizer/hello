@@ -33,4 +33,5 @@ jobs:
 
       - name: Create release branch and pr
         run: |
-          gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b "" -H ${{ steps.set_branch_name.outputs.branch_name }}
+          gh pr create -B main -t "${{ steps.set_branch_name.outputs.branch_name }}" -b "" -H "${{ steps.set_branch_name.outputs.branch_name }}"
+          
