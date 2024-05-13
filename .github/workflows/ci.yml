@@ -27,7 +27,8 @@ jobs:
         run: |
           git config --global user.email "mj-dev+ci-mj2@linkbal.co.jp"
           git config --global user.name "Ci Schedule Bot"
+          gh pr checkout main -b ${{ steps.set_branch_name.outputs.branch_name }}
 
       - name: Create release branch and pr
         run: |
-          gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b ${{ steps.set_branch_name.outputs.branch_name }}
+          gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b ""
