@@ -33,5 +33,4 @@ jobs:
 
       - name: Create release branch and pr
         run: |
-          gh pr create -B main -t "${{ steps.set_branch_name.outputs.branch_name }}" -b "" -H "${{ steps.set_branch_name.outputs.branch_name }}"
-          
+          git push -o merge_request.create -o merge_request.target=main -o merge_request.title="${{ steps.set_branch_name.outputs.branch_name }}" origin ${{ steps.set_branch_name.outputs.branch_name }}
