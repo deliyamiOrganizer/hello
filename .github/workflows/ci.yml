@@ -25,9 +25,9 @@ jobs:
 
       - name: Git Setting
         run: |
-          git config --global user.email "mj-dev+ci-mj2@linkbal.co.jp"
+          git config --global user.email "deliyami@gmail.com"
           git config --global user.name "Ci Schedule Bot"
-          git fetch origin/main
+          git fetch origin main
           gh pr checkout main -b ${{ steps.set_branch_name.outputs.branch_name }}
 
       - name: Create release branch and pr
