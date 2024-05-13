@@ -19,7 +19,7 @@ jobs:
           git config --global user.email "mj-dev+ci-mj2@linkbal.co.jp"
           git config --global user.name "Ci Schedule Bot"
           BRANCH_NAME="release-$(date --date 'tomorrow' +%Y-%m-%d)"
-          echo "::set-output name=branch_name::$BRNACH_NAME"
+          echo "::set-output name=branch_name::$BRANCH_NAME"
 
       - name: Create release pr
         run: |
