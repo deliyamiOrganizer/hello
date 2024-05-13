@@ -23,14 +23,6 @@ jobs:
           BRANCH_NAME="release-$(date --date 'tomorrow' +%Y-%m-%d)"
           echo "::set-output name=branch_name::$BRANCH_NAME"
 
-      - name: Git Setting
-        run: |
-          git config --global user.email "deliyami@gmail.com"
-          git config --global user.name "Ci Schedule Bot"
-          git fetch origin main
-          git switch main
-          git checkout -b ${{ steps.set_branch_name.outputs.branch_name }}
-
       - name: Create release branch and pr
         run: |
-          gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -h ${{ steps.set_branch_name.outputs.branch_name }}
+          gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -h ${{ steps.set_branch_name.outputs.branch_name }} -b ""
