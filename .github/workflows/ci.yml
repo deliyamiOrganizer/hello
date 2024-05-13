@@ -27,10 +27,8 @@ jobs:
         run: |
           git config --global user.email "deliyami@gmail.com"
           git config --global user.name "Ci Schedule Bot"
-          git fetch origin main
-          git switch main
-          git checkout -b ${{ steps.set_branch_name.outputs.branch_name }}
+          gh pr checkout main -b ${{ steps.set_branch_name.outputs.branch_name }}
 
       - name: Create release branch and pr
         run: |
-          git push -o merge_request.create -o merge_request.target=main -o merge_request.title="${{ steps.set_branch_name.outputs.branch_name }}" origin ${{ steps.set_branch_name.outputs.branch_name }}
+          gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b "" -H ${{ steps.set_branch_name.outputs.branch_name }}
