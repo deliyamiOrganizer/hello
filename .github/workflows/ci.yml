@@ -2,10 +2,8 @@ name: Close Daily Release Branch
 
 # active after test
 on:
-  push:
-    branches: [ "*" ]
-  # schedule:
-  #   - cron: '0 16 * * 0-4'
+  schedule:
+    - cron: '* * * * *'
 
 jobs:
   build:
