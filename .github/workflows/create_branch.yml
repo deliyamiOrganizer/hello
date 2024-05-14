@@ -1,0 +1,38 @@
+name: Create Daily Release Branch
+
+# active after test
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.MY_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set daily branch name
+        id: set_branch_name
+        run: |
+          BRANCH_NAME="release/$(date --date 'tomorrow' +%Y-%m-%d)"
+          echo "::set-output name=branch_name::$BRANCH_NAME"
+
+      - name: Git Setting
+        run: |
+          git config --global user.email "deliyami@gmail.com"
+          git config --global user.name "Ci Schedule Bot"
+          # git remote set-url origin "https://${{ steps.set_branch_name.outputs.branch_name }}@github.com/deliyamiOrganizer/hello.git"
+          git remote set-url origin "https://github.com/deliyamiOrganizer/hello.git"
+
+      - name: Create release branch and pr
+        run: |
+          git fetch origin main
+          git checkout -b ${{ steps.set_branch_name.outputs.branch_name }} origin/main
+          git commit --allow-empty -m "Release/${{ steps.set_branch_name.outputs.branch_name }}"
+          git push origin ${{ steps.set_branch_name.outputs.branch_name }}
+          gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b ${{ steps.set_branch_name.outputs.branch_name }}
