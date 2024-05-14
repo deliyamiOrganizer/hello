@@ -18,7 +18,7 @@ jobs:
       - name: Set daily branch name
         id: set_branch_name
         run: |
-          BRANCH_NAME="release-$(date --date 'tomorrow' +%Y-%m-%d)"
+          BRANCH_NAME="release/$(date --date 'tomorrow' +%Y-%m-%d)"
           # BRANCH_NAME="release-$(date --date 'today' +%Y-%m-%d)"
           echo "::set-output name=branch_name::$BRANCH_NAME"
 
