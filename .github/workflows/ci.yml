@@ -32,8 +32,8 @@ jobs:
 
       - name: Create release branch and pr
         run: |
-          git fetch origin main
-          git checkout -b ${{ steps.set_branch_name.outputs.branch_name }} origin/main
+          git fetch origin ${{ steps.set_branch_name.outputs.branch_name }}
+          git checkout ${{ steps.set_branch_name.outputs.branch_name }}
           # git commit --allow-empty -m "Release/${{ steps.set_branch_name.outputs.branch_name }}"
           # git push origin ${{ steps.set_branch_name.outputs.branch_name }}
           # gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b ${{ steps.set_branch_name.outputs.branch_name }}
