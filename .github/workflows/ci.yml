@@ -2,14 +2,12 @@ name: Create Daily Release Branch
 
 # active after test
 on:
-  push:
-    branches: 
-      - '*'
   schedule:
     - cron: '*/5 * * * *'
 
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
 
     env:
