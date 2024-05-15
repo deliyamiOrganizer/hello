@@ -1,9 +1,14 @@
 name: Close Daily Release Branch
 
 # active after test
+# on:
+#   schedule:
+#     - cron: '30 3 * * *'
+
 on:
-  schedule:
-    - cron: '30 3 * * *'
+  push:
+    branches:    
+      - main
 
 jobs:
   build:
@@ -11,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GH_TOKEN: ${{ secrets.MY_TOKEN }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
