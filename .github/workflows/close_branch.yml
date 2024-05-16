@@ -3,7 +3,7 @@ name: Close Daily Release Branch
 # active after test
 on:
   schedule:
-    - cron: '40 5 * * *' 
+    - cron: '20 6 * * *' 
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
         run: |
           BRANCH_NAME="release/$(date --date 'tomorrow' +%Y-%m-%d)"
           # BRANCH_NAME="release-$(date --date 'today' +%Y-%m-%d)"
-          echo "::set-output name=branch_name::$BRANCH_NAME"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_OUTPUT
 
       - name: Git Setting
         run: |
@@ -31,6 +31,6 @@ jobs:
 
       - name: Create release branch and pr
         run: |
-          git fetch origin ${{ steps.set_branch_name.outputs.branch_name }}
-          # git checkout -b ${{ steps.set_branch_name.outputs.branch_name }}
-          git push -d origin ${{ steps.set_branch_name.outputs.branch_name }}
+          git fetch origin ${{ $BRANCH_NAME }}
+          # git checkout -b ${{ $BRANCH_NAME }}
+          git push -d origin ${{ $BRANCH_NAME }}
