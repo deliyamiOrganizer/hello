@@ -3,7 +3,7 @@ name: Create Daily Release Branch
 # active after test
 on:
   schedule:
-    - cron: '45 7 * * *'
+    - cron: '15 9 * * *'
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Set daily branch name
         id: set_branch_name

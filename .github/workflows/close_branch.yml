@@ -3,7 +3,7 @@ name: Close Daily Release Branch
 # active after test
 on:
   schedule:
-    - cron: '0 8 * * *' 
+    - cron: '20 9 * * *' 
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Set daily branch name
         id: set_branch_name
