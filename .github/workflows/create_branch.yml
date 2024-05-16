@@ -3,7 +3,7 @@ name: Create Daily Release Branch
 # active after test
 on:
   schedule:
-    - cron: '45 6 * * *'
+    - cron: '45 7 * * *'
 
 jobs:
   build:

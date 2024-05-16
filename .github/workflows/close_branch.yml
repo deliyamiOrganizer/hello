@@ -3,7 +3,7 @@ name: Close Daily Release Branch
 # active after test
 on:
   schedule:
-    - cron: '0 7 * * *' 
+    - cron: '0 8 * * *' 
 
 jobs:
   build:
