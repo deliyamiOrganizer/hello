@@ -27,12 +27,17 @@ jobs:
           git config --global user.email "deliyami@gmail.com"
           git config --global user.name "Ci Schedule Bot"
           # git remote set-url origin "https://${{ steps.set_branch_name.outputs.branch_name }}@github.com/deliyamiOrganizer/hello.git"
-          git remote set-url origin "https://github.com/deliyamiOrganizer/hello.git"
+          # git remote set-url origin "https://github.com/deliyamiOrganizer/hello.git"
 
       - name: Create release branch and pr
         run: |
+          echo 'fetch'
           git fetch origin main
+          echo 'checkout'
           git checkout -b ${{ steps.set_branch_name.outputs.branch_name }} origin/main
+          echo 'commit'
           git commit --allow-empty -m "Release/${{ steps.set_branch_name.outputs.branch_name }}"
+          echo 'push'
           git push origin ${{ steps.set_branch_name.outputs.branch_name }}
+          echo 'pr'
           gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b ${{ steps.set_branch_name.outputs.branch_name }}
