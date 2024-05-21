@@ -34,6 +34,6 @@ jobs:
           git checkout -b ${{ steps.set_branch_name.outputs.branch_name }} origin/main
           git commit --allow-empty -m "Release/${{ steps.set_branch_name.outputs.branch_name }}"
           git push origin ${{ steps.set_branch_name.outputs.branch_name }}
-          output = $(gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b ${{ steps.set_branch_name.outputs.branch_name }})
+          output=$(gh pr create -B main -t ${{ steps.set_branch_name.outputs.branch_name }} -b ${{ steps.set_branch_name.outputs.branch_name }})
           echo "end!"
           echo $output
